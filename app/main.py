@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
-from app import models, schemas 
+from app import models, schemas , utils
 from app.database import engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
@@ -48,6 +48,8 @@ async def update_todo(todo_id: int, updated_todo: schemas.TodoCreate, db: Sessio
 
 @app.post("/users/", status_code=status.HTTP_201_CREATED, response_model=schemas.UserResponse)
 def create_users(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    hashed_password = utils.hash(user.password)
+    user.password = hashed_password
     new_user = models.Users(**user.model_dump())
     
     db.add(new_user)
