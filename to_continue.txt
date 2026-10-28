@@ -1,0 +1,14 @@
+Maine FastAPI, PostgreSQL, SQLAlchemy ORM, aur Pydantic use karke ek secured Todo API ka basic version banaya hua hai. 
+
+Mera current status yeh hai:
+- User authentication (JWT tokens, bcrypt password hashing, OAuth2PasswordBearer) chal raha hai.
+- Todo table me `owner_id` Foreign Key (users.id) lagi hui hai.
+- Core CRUD routes (Create, Read, Update, Delete) implemented hain aur logged-in user isolation (403 Forbidden check) working hai.
+
+Ab mujhe is project ko production-ready level par complete karna hai. Mujhe step-by-step guide karo aur clean, production-grade code do in 4 tasks ke liye:
+1. Query Parameters: `GET /todos` endpoint me pagination (`limit`, `skip`) aur search keyword filter implement karna.
+2. SQLAlchemy Relationships: `Todo` aur `User` models me `relationship()` setup karna taaki Todo ke sath owner details return ho sakein.
+3. Environment Management: Hardcoded database credentials aur JWT secrets ko `pydantic-settings` aur `.env` file me shift karna.
+4. Database Migrations: Alembic setup karna taaki database changes code ke through manage hon.
+
+Mujhe step 1 (Pagination & Search) se shuru karwao.
